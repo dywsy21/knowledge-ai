@@ -53,6 +53,7 @@ def get_store() -> PlatformStore:
             timeout_seconds=settings.ai_timeout_seconds,
         ),
         object_store=object_store,
+        seed=False,
     )
 
 

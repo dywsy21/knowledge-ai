@@ -20,13 +20,20 @@ from app.platform.object_storage import DisabledObjectStore, ObjectStore
 
 
 class PlatformStore:
-    def __init__(self, harness: AIHarness, object_store: ObjectStore | None = None) -> None:
+    def __init__(
+        self,
+        harness: AIHarness,
+        object_store: ObjectStore | None = None,
+        *,
+        seed: bool = True,
+    ) -> None:
         self.harness = harness
         self.object_store = object_store or DisabledObjectStore()
         self.sources: dict[str, KnowledgeSource] = {}
         self.interactions: dict[str, Interaction] = {}
         self.feedback: list[Feedback] = []
-        self._seed()
+        if seed:
+            self._seed()
 
     def create_source(self, payload: KnowledgeSourceCreate) -> KnowledgeSource:
         source = KnowledgeSource(**payload.model_dump())
