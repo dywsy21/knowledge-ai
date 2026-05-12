@@ -21,6 +21,8 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
+    links:
+      - "backend:backend"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     network_mode: bridge
